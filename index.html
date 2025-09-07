@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopClub - Professional E-commerce</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4F46E5',
+            secondary: '#10B981',
+            dark: '#1F2937',
+            light: '#F9FAFB',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .product-card {
+      transition: all 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-filter {
+      transition: all 0.2s ease;
+    }
+    
+    .category-filter:hover {
+      background-color: #4F46E5;
+      color: white;
+    }
+    
+    .cart-notification {
+      animation: slideIn 0.5s forwards;
+    }
+    
+    @keyframes slideIn {
+      from { right: -100px; opacity: 0; }
+      to { right: 20px; opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+  <!-- Announcement Bar -->
+  <div class="bg-primary text-white py-2 text-center text-sm">
+    Free shipping on all orders over $50! 🚚
+  </div>
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <nav class="flex items-center justify-between py-4">
+        <!-- Logo -->
+        <a href="index.html" class="text-2xl font-bold text-primary flex items-center">
+          <i class="fas fa-shopping-bag mr-2"></i>Shop <span class="text-green-400"> Club </span>
+        </a> 
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex space-x-8 text-gray-700 font-medium">
+          <li><a href="index.html" class="hover:text-primary transition">Home</a></li>
+          <li><a href="shop.html" class="hover:text-primary transition">Shop</a></li>
+          <li><a href="about.html" class="hover:text-primary transition">About</a></li>
+          <li><a href="contact.html" class="hover:text-primary transition">Contact</a></li>
+        </ul>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-6">
+          <!-- Search -->
+          <div class="hidden md:block relative">
+            <input type="text" placeholder="Search products..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+          </div>
+          
+          <!-- User & Cart -->
+          <a href="login.html" class="text-gray-600 hover:text-primary transition">
+            <i class="fas fa-user text-lg"></i>
+          </a>
+          <a href="cart.html" class="text-gray-600 hover:text-primary transition relative">
+            <i class="fas fa-shopping-cart text-lg"></i>
+            <span class="absolute -top-2 -right-2 bg-secondary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+          </a>
+          
+          <!-- Mobile Menu Button -->
+          <button id="menu-btn" class="md:hidden text-gray-700 text-xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg px-4 pt-2 pb-4">
+      <div class="relative mb-4">
+        <input type="text" placeholder="Search products..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+      </div>
+      <ul class="flex flex-col space-y-3">
+        <li><a href="index.html" class="block py-2 px-4 rounded hover:bg-gray-100 transition">Home</a></li>
+        <li><a href="shop.html" class="block py-2 px-4 rounded hover:bg-gray-100 transition">Shop</a></li>
+        <li><a href="about.html" class="block py-2 px-4 rounded hover:bg-gray-100 transition">About</a></li>
+        <li><a href="contact.html" class="block py-2 px-4 rounded hover:bg-gray-100 transition">Contact</a></li>
+        <li><a href="login.html" class="block py-2 px-4 rounded hover:bg-gray-100 transition">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary to-purple-600 text-white">
+    <div class="container mx-auto px-4 py-16 md:py-24">
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Summer Sale <span class="text-secondary">Up To 50% Off</span>
+          </h1>
+          <p class="text-xl mb-8 max-w-md mx-auto md:mx-0">
+            Discover the latest trends in fashion, electronics, and home goods with our exclusive summer collection.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <a href="shop.html" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg text-center">
+              Shop Now
+            </a>
+            <a href="#featured" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition text-center">
+              View Featured
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1070&q=80" alt="Summer Sale" class="rounded-xl shadow-2xl max-w-full h-auto">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <a href="#" class="category-filter group bg-gray-50 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition">
+          <div class="bg-gray-100/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition">
+            <i class="fas fa-tshirt text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-semibold">Clothing</h3>
+          <p class="text-sm text-gray-500 mt-1">125 products</p>
+        </a>
+        
+        <a href="#" class="category-filter group bg-gray-50 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition">
+          <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition">
+            <i class="fas fa-mobile-alt text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-semibold">Electronics</h3>
+          <p class="text-sm text-gray-500 mt-1">89 products</p>
+        </a>
+        
+        <a href="#" class="category-filter group bg-gray-50 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition">
+          <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition">
+            <i class="fas fa-couch text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-semibold">Home</h3>
+          <p class="text-sm text-gray-500 mt-1">67 products</p>
+        </a>
+        
+        <a href="#" class="category-filter group bg-gray-50 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition">
+          <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition">
+            <i class="fas fa-heart text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-semibold">Beauty</h3>
+          <p class="text-sm text-gray-500 mt-1">92 products</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="featured" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-3xl font-bold">Featured Products</h2>
+        <a href="shop.html" class="text-primary font-semibold flex items-center hover:text-primary/80 transition">
+          View all <i class="fas fa-arrow-right ml-2 text-sm"></i>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Product Card -->
+        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="Wireless Headphones" class="w-full h-56 object-cover">
+            <div class="absolute top-2 right-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded-full">
+              SALE
+            </div>
+            <div class="absolute top-2 left-2">
+              <button class="bg-white p-2 rounded-full shadow-md hover:text-secondary transition">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center mb-2">
+              <div class="flex text-amber-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(128)</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Wireless Headphones</h3>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-primary font-bold text-xl">$89.99</span>
+                <span class="text-gray-500 line-through text-sm ml-2">$129.99</span>
+              </div>
+              <button class="bg-primary text-white p-2 rounded-full hover:bg-primary/90 transition add-to-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card -->
+        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=499&q=80" alt="Smart Watch" class="w-full h-56 object-cover">
+            <div class="absolute top-2 left-2">
+              <button class="bg-white p-2 rounded-full shadow-md hover:text-secondary transition">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center mb-2">
+              <div class="flex text-amber-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(95)</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Smart Watch Series 5</h3>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-primary font-bold text-xl">$199.99</span>
+              </div>
+              <button class="bg-primary text-white p-2 rounded-full hover:bg-primary/90 transition add-to-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card -->
+        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80" alt="Running Shoes" class="w-full h-56 object-cover">
+            <div class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+              NEW
+            </div>
+            <div class="absolute top-2 left-2">
+              <button class="bg-white p-2 rounded-full shadow-md hover:text-secondary transition">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center mb-2">
+              <div class="flex text-amber-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(64)</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Running Shoes</h3>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-primary font-bold text-xl">$79.99</span>
+              </div>
+              <button class="bg-primary text-white p-2 rounded-full hover:bg-primary/90 transition add-to-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card -->
+        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Bluetooth Earbuds" class="w-full h-56 object-cover">
+            <div class="absolute top-2 left-2">
+              <button class="bg-white p-2 rounded-full shadow-md hover:text-secondary transition">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center mb-2">
+              <div class="flex text-amber-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-gray-500 text-sm ml-2">(42)</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Bluetooth Earbuds</h3>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-primary font-bold text-xl">$59.99</span>
+                <span class="text-gray-500 line-through text-sm ml-2">$79.99</span>
+              </div>
+              <button class="bg-primary text-white p-2 rounded-full hover:bg-primary/90 transition add-to-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+      <p class="max-w-2xl mx-auto mb-8">Stay updated with our latest products, exclusive offers, and discounts.</p>
+      <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-800">
+        <button type="submit" class="bg-secondary px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-gray-300 pt-12 pb-6">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div>
+            <a href="index.html" class="text-2xl font-bold text-primary flex items-center">
+          <i class="fas fa-shopping-bag mr-2"></i>Shop <span class="text-green-400"> Club </span>
+        </a>
+         <!--        <h3 class="text-white text-lg font-semibold mb-4"> Shop <span class="text-green-400" > Club </span></h3> 
+           <p class="mb-4">Your one-stop destination for all your shopping needs. Quality products at affordable prices.</p> --> 
+        
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Home</a></li>
+            <li><a href="#" class="hover:text-white transition">Shop</a></li>
+            <li><a href="#" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition">Contact</a></li>
+            <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Customer Service</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white transition">Track Order</a></li>
+            <li><a href="#" class="hover:text-white transition">Return Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Contact Info</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+              <span>Faisalabad Pakistan </span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-phone mt-1 mr-3"></i>
+              <span>   03180070889 </span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-envelope mt-1 mr-3"></i>
+              <span>ranamuhammadnaqash@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 pt-6 text-center text-sm">
+        <p>&copy; 2023 ShopEasy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Notification -->
+  <div id="cart-notification" class="fixed top-20 right-5 bg-white shadow-lg rounded-lg p-4 hidden cart-notification" style="z-index: 1000;">
+    <div class="flex items-center">
+      <div class="bg-green-100 p-2 rounded-full mr-3">
+        <i class="fas fa-check-circle text-green-500"></i>
+      </div>
+      <div>
+        <p class="font-semibold">Item added to cart!</p>
+        <p class="text-sm text-gray-600">Check your cart to complete purchase</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS for Mobile Menu & Cart -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartNotification = document.getElementById('cart-notification');
+    
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Show notification
+        cartNotification.classList.remove('hidden');
+        
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          cartNotification.classList.add('hidden');
+        }, 3000);
+      });
+    });
+  </script>
+
+</body>
+</html>
